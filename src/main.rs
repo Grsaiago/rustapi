@@ -1,17 +1,6 @@
-use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-
-struct ContactRouter {}
-
-impl ContactRouter {
-    pub fn setup_routes(cfg: &mut web::ServiceConfig) {
-        cfg.service(web::scope("/contact"))
-            .route("/", web::get().to(Self::get_all_contacts));
-    }
-
-    async fn get_all_contacts() -> impl Responder {
-        HttpResponse::Ok().body("<h1>Hello World</h1>")
-    }
-}
+use actix_web::{App, HttpServer};
+mod routes;
+use crate::routes::contact_router::*;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
